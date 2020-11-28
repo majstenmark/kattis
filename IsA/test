@@ -1,0 +1,9 @@
+4 4
+A is-a B
+B is-a C
+B has-a H
+C has-a D
+A has-a D
+A has-a H
+A has-a C
+C has-a H

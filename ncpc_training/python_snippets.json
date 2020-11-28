@@ -1,0 +1,216 @@
+{
+    "Nint": {
+      "prefix": "N",
+      "body": "N = int(raw_input())",
+      "description": "N int"
+    },
+    "input": {
+      "prefix": "mir",
+      "body": "[int(v) for v in raw_input().split()]",
+      "description": "input"
+    },
+    "debug": {
+      "prefix": "debug",
+      "body": "DEBUG = True\ndef debug(*s):\n    p = ' '.join(map(str, s))\n    if DEBUG:\n        print(p)\n",
+      "description": "debug"
+    },
+    "inf": {
+      "prefix": "INF",
+      "body": "INF = 10**12",
+      "description": "inf"
+    },
+    "read": {
+      "prefix": "ra",
+      "body": "raw_input()",
+      "description": "read"
+    },
+    "readint": {
+      "prefix": "in",
+      "body": "int(raw_input())",
+      "description": "readint"
+    },
+    "readandsplit": {
+      "prefix": "ras",
+      "body": "raw_input().split()",
+      "description": "readandsplit"
+    },
+    "gcd": {
+      "prefix": "gcd",
+      "body": "def gcd(a, b):return gcd(b, a % b) if b else a\n",
+      "description": "gcd"
+    },
+    "forloop": {
+      "prefix": "forn",
+      "body": "for n in range(N):\n    ",
+      "description": "forloop"
+    },
+    "bfs": {
+      "prefix": "bfs",
+      "body": "def bfs(q, g):\n    visited = [False] * N\n    for node in q:\n        visited[node] = True\n    while q:\n        q2 = []\n        for node in q:\n            for ne in g[node]:\n                if not visited[ne]:\n                    visited[ne] = True\n                    q2.append(ne)\n        q = q2\n    return visited",
+      "description": "bfs"
+    },
+    "convex_hull": {
+      "prefix": "convexhull",
+      "body": "def convex_hull(points):\n    points = sorted(set(points))\n    if len(points) <= 1:\n        return points\n\n    def cross(o, a, b):\n        return (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0])\n\n    lower = []\n    for p in points:\n        while len(lower) >= 2 and cross(lower[-2], lower[-1], p) <= 0:\n            lower.pop()\n        lower.append(p)\n\n    # Build upper hull\n    upper = []\n    for p in reversed(points):\n        while len(upper) >= 2 and cross(upper[-2], upper[-1], p) <= 0:\n            upper.pop()\n        upper.append(p)\n    return lower[:-1] + upper[:-1]",
+      "description": "convex_hull"
+    },
+    "unionfind": {
+      "prefix": "UF",
+      "body": "parents = []\ndef find(x):\n    if parents[x][0] != x:\n        parents[x][0] = find(parents[x][0])\n    return parents[x][0]\n\ndef add(a, a_parent, b_parent):\n\n    p,size= parents[b_parent]\n    size += parents[a_parent][1]\n    parents[b_parent] =  [b_parent, size]\n    parents[a_parent][0] = b_parent\n\ndef union(a,b):\n    a_parent = find(a)\n    b_parent = find(b)\n    if a_parent == b_parent:\n        return False\n\n    if parents[a_parent][1] < parents[b_parent][1]:\n        add(a,a_parent, b_parent)\n    else:\n        add(b, b_parent,a_parent)\n    return True",
+      "description": "unionfind"
+    },
+    "top": {
+      "prefix": "top",
+      "body": [
+        "#returns order so that edges only point forward in partial order",
+        "def topsort(g):",
+        "    ps=[0] * len(g)",
+        "    for ns in g:",
+        "        for n in ns:",
+        "            ps[n] += 1",
+        "    q =[i for i,v in enumerate(ps) if v == 0]",
+        "    order = []",
+        "    while q:",
+        "        q2 = []",
+        "        for n in q:",
+        "            order.append(n)",
+        "            for p in g[n]:",
+        "                ps[p] -=1",
+        "                if ps[p] == 0:",
+        "                    q2.append(p)",
+        "        q =q2",
+        "    return order",
+        ""
+      ],
+      "description": "topsort"
+    },
+    "itr": {
+      "prefix": "itr",
+      "body": [
+        "import sys",
+        "",
+        "itr = (line for line in sys.stdin.read().split('\\n'))"
+      ],
+      "description": "itreator"
+    },
+    "nextitr": {
+      "prefix": "ne",
+      "body": [
+        "next(itr)"
+      ],
+      "description": ""
+    },
+    "lines": {
+      "prefix": "lines",
+      "body": [
+        "import sys",
+        "",
+        "lines = sys.stdin.readlines()"
+      ],
+      "description": "sys lines"
+    },
+    "lcm": {
+      "prefix": "lcm",
+      "body": [
+        "def lcm(a, b): return a*b//gcd(a,b)"
+      ],
+      "description": "lcm"
+    },
+    "fort": {
+      "prefix": "fort",
+      "body": [
+        "T = int(raw_input())",
+        "for t in range(T):",
+        "    "
+      ],
+      "description": "fort"
+    },
+    "codejam": {
+      "prefix": "codejam",
+      "body": [
+        "inp = input",
+        "",
+        "def nl():",
+        "    return [int(v) for v in inp().split()]",
+        "",
+        "def solve(S):",
+        "    return ''",
+        "    ",
+        "T = int(inp())",
+        "for t in range(T):",
+        "    N = int(inp())",
+        "    S = nl()",
+        "    R = solve(S)",
+        "",
+        "    print('Case #{}: {}'.format(t+1, R))"
+      ],
+      "description": "codejam teplate"
+    },
+    "fenwick": {
+      "prefix": "fenwick",
+      "body": [
+        "arr = [0] * (N + 1) #1-indexed!!!!!!",
+        "def inc(arr, i, val):",
+        "    private_inc(arr, i + 1, val)",
+        "",
+        "def sum(arr, a):",
+        "    return private_sum(arr, a)",
+        "",
+        "def private_inc(arr, i, val):",
+        "    while i < len(arr):",
+        "        arr[i] += val",
+        "        i += i & -i",
+        "",
+        "def private_sum(arr, i):",
+        "    s = 0",
+        "    while i > 0:",
+        "        s += arr[i]",
+        "        i -= i & -i",
+        "    return s"
+      ],
+      "description": "fenwick"
+    },
+    "dijkstra": {
+      "prefix": "dij",
+      "body": [
+        "",
+        "import heapq",
+        "",
+        "def dij(S, g):",
+        "    #g list with lists with tuples distance, other node",
+        "    # Dijkstra from S. Check t optionally",
+        "    INF = 10**12",
+        "    N = len(g)",
+        "    dist = [INF for _ in range(N)]",
+        "",
+        "    pq = []",
+        "    dist[S] = 0",
+        "    pq.append((0, S))",
+        "    heapq.heapify(pq)",
+        "    done = False",
+        "    while pq and not done:",
+        "        (nd, node) = heapq.heappop(pq)",
+        "        #if node == T: return dist[T]",
+        "        for (dd, nn) in g[node]:",
+        "            alt = dist[node] + dd",
+        "            if dist[nn] > alt:",
+        "                dist[nn] = alt",
+        "                heapq.heappush(pq, (dist[nn], nn))",
+        "",
+        "    return dist"
+      ],
+      "description": "dikstras"
+    },
+    "readinput": {
+      "prefix": "nl",
+      "body": [
+        "import sys",
+        "",
+        "itr = (line for line in sys.stdin.read().split('\\n'))",
+        "def inp(): return next(itr)",
+        "def nl(): return [int(v) for v in inp().split()]",
+        "def ni(): return int(inp())"
+      ],
+      "description": "inputtemplate"
+    }
+  }
