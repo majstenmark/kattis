@@ -1,2 +1,7 @@
 *.class
 *.o
+*.py[co]
+*.in
+*.in[1-9]
+*.ans
+*.txt
