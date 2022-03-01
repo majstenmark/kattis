@@ -1,4 +1,1 @@
-
-    leo.pendown()
-    square(side,color,fill)
-    
+s[pos:i] + s[i+

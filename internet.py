@@ -20,3 +20,17 @@ for i in range(N):
         print(i+1)
 if len(visited) == N:
     print('Connected')
+
+def bfs(q, g):
+    visited = [False] * N
+    for node in q:
+        visited[node] = True
+    while q:
+        q2 = []
+        for node in q:
+            for ne in g[node]:
+                if not visited[ne]:
+                    visited[ne] = True
+                    q2.append(ne)
+        q = q2
+    return visited
