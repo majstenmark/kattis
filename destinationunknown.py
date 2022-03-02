@@ -22,8 +22,7 @@ def dij(S, G):
     
     while pq:
         (nd, node) = heapq.heappop(pq)
-        #if node == h or node == g:
-        #    onpath[node] = True
+        
         if nd > dist[node]: continue
         #if node == T: return dist[T]
         for (dd, nn) in G[node]:
@@ -37,14 +36,16 @@ def dij(S, G):
 
 
 T = ni()
+out = []
 for _ in range(T):
     N, m, t = nl()
     s, g, h = nll()
+    g, h = sorted([g, h])
     G = [[] for _ in range(2*N)]
     for _ in range(m):
         a, b, d = nl()
-        a, b = a-1, b-1
-        if (a == g and b == h) or (a == h and b == g):
+        a, b = sorted([a-1, b-1])
+        if (a == g and b == h):
             G[a].append((d, b+N))
             G[b].append((d, a+N))
         else:
@@ -52,17 +53,18 @@ for _ in range(T):
             G[b].append((d, a))
             G[a+N].append((d, b+N))
             G[b+N].append((d, a+N))
-            
+                
         
         
     
-    targets = set([(ni()-1) for _ in range(t)])
+    targets = [(ni()-1) for _ in range(t)]
     dists = dij(s, G)
     ok = []
-    print(dists)
+    #print(dists)
     for t in targets:
-        if dists[t+N] < INF:
+        if dists[t+N] <= dists[t] and dists[t+N]< INF:
             ok.append(t+1)
     ok.sort()
-    print(' '.join(map(str, ok)))
+    out.append(' '.join(map(str, ok)))
+print('\n'.join(out))
 
